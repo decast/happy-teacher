@@ -29,12 +29,46 @@
         .quote-card { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
         .quote-card h2, .quote-card p { color: white; }
         .footer { text-align: center; color: rgba(255,255,255,0.8); margin-top: 30px; padding-bottom: 20px; }
+
+        .heart {
+            position: fixed;
+            font-size: 1.5rem;
+            pointer-events: none;
+            animation: floatUp 3s ease-out forwards;
+            z-index: 1000;
+        }
+
+        .heart-tip {
+            position: fixed;
+            background: rgba(255,255,255,0.95);
+            padding: 12px 18px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            font-size: 0.95rem;
+            color: #333;
+            pointer-events: none;
+            animation: tipFloat 3s ease-out forwards;
+            z-index: 1000;
+            max-width: 200px;
+        }
+
+        @keyframes floatUp {
+            0% { opacity: 0; transform: translateY(0) scale(0.5); }
+            20% { opacity: 1; transform: translateY(-20px) scale(1); }
+            100% { opacity: 0; transform: translateY(-150px) scale(0.8); }
+        }
+
+        @keyframes tipFloat {
+            0% { opacity: 0; transform: translateY(0) scale(0.8); }
+            15% { opacity: 1; transform: translateY(-30px) scale(1); }
+            100% { opacity: 0; transform: translateY(-120px) scale(0.9); }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎓 祝福老师</h1>
+            <h1>🎓 祝福徐老师</h1>
             <p>感谢您的辛勤付出</p>
         </div>
 
@@ -66,5 +100,58 @@
             <p>— 学生敬上 —</p>
         </div>
     </div>
+
+    <script>
+        const blessings = [
+            '徐老师您辛苦了！',
+            '感谢徐老师的悉心教导',
+            '祝徐老师桃李满天下',
+            '徐老师是最好的老师',
+            '感恩有徐老师',
+            '愿徐老师天天开心',
+            '徐老师的恩情永难忘',
+            '徐老师是我们的榜样',
+            '谢谢徐老师的耐心',
+            '祝徐老师身体健康',
+            '徐老师的教诲铭记在心',
+            '愿徐老师工作顺利',
+            '感谢徐老师的无私奉献',
+            '徐老师点亮了我们的人生',
+            '祝徐老师节日快乐'
+        ];
+
+        const hearts = ['❤️', '💕', '💖', '💗', '💓', '💝', '💘', '🩷'];
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.top = Math.random() * 100 + window.innerHeight - 100 + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 3000);
+        }
+
+        function createTip() {
+            const tip = document.createElement('div');
+            tip.className = 'heart-tip';
+            tip.textContent = blessings[Math.floor(Math.random() * blessings.length)];
+            tip.style.left = Math.random() * (window.innerWidth - 220) + 10 + 'px';
+            tip.style.top = Math.random() * 100 + window.innerHeight - 100 + 'px';
+            document.body.appendChild(tip);
+            setTimeout(() => tip.remove(), 3000);
+        }
+
+        setInterval(() => {
+            if (Math.random() > 0.5) {
+                createHeart();
+            } else {
+                createTip();
+            }
+        }, 800);
+
+        createHeart();
+        createTip();
+    </script>
 </body>
 </html>
